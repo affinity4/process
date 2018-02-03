@@ -1,0 +1,8 @@
+# folders
+.idea/
+vendor/
+
+# files
+composer.phar
+composer.lock
+
