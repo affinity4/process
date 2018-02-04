@@ -21,6 +21,14 @@ class Command
      *
      * Command string factory
      *
+     * Usage:
+     *
+     * ```
+     *
+     * $core = new Affinity4\Process\Command::create('git init', ['-q'], ['--bare']); // git init --bare -q
+     *
+     * ```
+     *
      * @author Luke Watts <luke@affinity4.ie>
      *
      * @since 0.2.0
