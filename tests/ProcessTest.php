@@ -8,7 +8,7 @@ class ProcessTest extends TestCase
 {
     private $actual;
 
-    public function testRun()
+    public function testExecute()
     {
         $expected = 'React\Promise\PromiseInterface';
         $actual = Process::execute('dir .');
@@ -16,7 +16,7 @@ class ProcessTest extends TestCase
         $this->assertInstanceOf($expected, $actual);
     }
 
-    public function testRunThenSucceeds()
+    public function testExecuteThenSucceeds()
     {
         $expected = 'Success';
         Process::execute('dir .')->then(
@@ -27,6 +27,23 @@ class ProcessTest extends TestCase
                 $this->actual = 'Failure';
             }
         );
+
+        $this->assertEquals($expected, $this->actual);
+    }
+
+    public function testRun()
+    {
+        $expected = 'React\Promise\PromiseInterface';
+        $process = Process::run('dir .');
+
+        $this->assertInstanceOf($expected, $process);
+
+        $process->then(function ($onSuccess) {
+            $this->actual = 'Pass';
+        }, function ($onFail) {
+            $this->actual = 'Fail';
+        });
+        $expected = 'Pass';
 
         $this->assertEquals($expected, $this->actual);
     }
